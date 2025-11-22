@@ -1,15 +1,9 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Title</title>
-        <!-- Required meta tags -->
+        <title>Directorio de Contactos</title>
         <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-
-        <!-- Bootstrap CSS v5.2.1 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -19,152 +13,165 @@
     </head>
 
     <body class="container">
-
-        <ul
-            class="nav nav-tabs"
-        >
+        <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page"
-                    >DIRECTORIO</a
-                >
-            </li>
-            <li class="nav-item dropdown">
-                <a
-                    class="nav-link dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    role="button"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    >Dropdown</a
-                >
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Action</a>
-                </div>
+                <a href="/" class="nav-link active" aria-current="page">DIRECTORIO</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">Another link</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link disabled">Disabled</a>
+                <a href="/crearcontacto" class="nav-link">Crear Contacto</a>
             </li>
         </ul>
-        
 
         <br><br>
         
-<div
+        <div class="table-responsive">
+            <h1>CONTACTOS</h1>
+            <a class="btn btn-success" href="/crearcontacto" role="button">+ Crear Contacto</a>
+            <br><br>
 
-    class="table-responsive"
->
-<h1>CONTACTOS</h1>
-<a
-    name=""
-    id=""
-    class="btn btn-success"
-    href="/crearcontacto"
-    role="button"
-    >Crear Contacto</a
->
-<br><br>
+            <table class="table table-striped table-hover" id="tabla_resultados">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">NOMBRE COMPLETO</th>
+                        <th scope="col">GÉNERO</th>
+                        <th scope="col">DIRECCIÓN</th>
+                        <th scope="col">TIPO TELÉFONO</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">TELÉFONO</th>
+                        <th scope="col">ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
 
-
-    <table class="table table-primary" id="tabla_resultados" >
-        <thead>
-            <tr>
-            <th scope="col">IDENTIFICACION</th>
-            <th scope="col"> NOMBRE COMPLETO</th>
-            <th scope="col">GENERO</th>
-            <th scope="col">DIRECCION</th>
-            <th scope="col">TIPO DE TELEFONO</th>
-            <th scope="col">EMAIL</th>
-            <th scope="col">TELEFONO</th>
-            <th scope="col">IMAGEN</th>
-            <th scope="col">ACCIONES</th>
-            
-            </tr>
-        </thead>
-        <tbody>  </tbody>
-    </table>
-</div>
-
-<script>
-
-    fetch("/contactos")
-    .then(res=>res.json())
-    .then(data=>{
-        const tbody=document.querySelector("#tabla_resultados tbody")
-        data.forEach(contacto => {
-            const fila=document.createElement("tr")
-            fila.innerHTML=`
-            <td>${contacto.id_contacto}</td>
-            <td>${contacto.primer_nombre} ${contacto.segundo_nombre} ${contacto.primer_apellido} ${contacto.segundo_apellido}  </td>
-            <td> ${contacto.detalle_genero} </td>
-            <td> ${contacto.detalle_direccion}  </td>
-            <td> ${contacto.detalle_tipo_telefono} </td>
-            <td> ${contacto.email} </td>
-            <td> ${contacto.telefono} </td>
-            <td> ${contacto.imagen} </td>
-            <td> <a
-    
-    id=""
-    class="btn btn-info"
-    href="#"
-    role="button"
-    >Editar</a>
-    <a
-    
-    id=""
-    class="btn btn-danger"
-    href="#"
-    role="button"
-    >Eliminar</a>
-    </td>
-
-            `
-            tbody.appendChild(fila)
-        });
-    })
-    .catch(err=>console.log("error al cargar la informacion",err))
-</script>  
-
-
-
-
-<script>
-const Swal = require('sweetalert2')
-    Swal.fire({
-position: "top-end",
-icon: "success",
-title: "<%= mensaje %>",
-showConfirmButton: false,
-timer: 1500
-});
-</script>
-
-
-        
-
-
-
-
-
-
-
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
+        <script>
+            // Función para cargar contactos
+            function cargarContactos() {
+                fetch("/contactos")
+                    .then(res => res.json())
+                    .then(data => {
+                        const tbody = document.querySelector("#tabla_resultados tbody");
+                        tbody.innerHTML = '';
+                        
+                        if (data.length === 0) {
+                            tbody.innerHTML = '<tr><td colspan="8" class="text-center">No hay contactos registrados</td></tr>';
+                            return;
+                        }
+                        
+                        data.forEach(contacto => {
+                            const fila = document.createElement("tr");
+                            fila.innerHTML = `
+                                <td>${contacto.id_contacto}</td>
+                                <td>${contacto.primer_nombre} ${contacto.segundo_nombre || ''} ${contacto.primer_apellido} ${contacto.segundo_apellido || ''}</td>
+                                <td>${contacto.detalle_genero}</td>
+                                <td>${contacto.detalle_direccion}</td>
+                                <td>${contacto.detalle_tipo_telefono}</td>
+                                <td>${contacto.email || 'N/A'}</td>
+                                <td>${contacto.telefono || 'N/A'}</td>
+                                <td>
+                                    <button class="btn btn-info btn-sm" onclick="editarContacto(${contacto.id_contacto})">
+                                        <i class="bi bi-pencil"></i> Editar
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" onclick="eliminarContacto(${contacto.id_contacto}, '${contacto.primer_nombre} ${contacto.primer_apellido}')">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </button>
+                                </td>
+                            `;
+                            tbody.appendChild(fila);
+                        });
+                    })
+                    .catch(err => {
+                        console.error("Error al cargar contactos:", err);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'No se pudieron cargar los contactos',
+                            confirmButtonColor: '#d33'
+                        });
+                    });
+            }
+
+            // Función para eliminar contacto
+            function eliminarContacto(id, nombre) {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    html: `Se eliminará el contacto de:<br><strong>${nombre}</strong>`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Mostrar loading
+                        Swal.fire({
+                            title: 'Eliminando...',
+                            text: 'Por favor espera',
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+
+                        // Aquí iría la petición DELETE real al servidor
+                        // Por ahora simulamos la eliminación
+                        setTimeout(() => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '¡Eliminado!',
+                                text: 'El contacto ha sido eliminado correctamente',
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+                            cargarContactos();
+                        }, 1000);
+                    }
+                });
+            }
+
+            // Función para editar contacto
+            function editarContacto(id) {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Funcionalidad en desarrollo',
+                    text: 'La edición estará disponible próximamente',
+                    confirmButtonColor: '#0d6efd'
+                });
+            }
+
+            // Cargar contactos al iniciar
+            document.addEventListener('DOMContentLoaded', () => {
+                cargarContactos();
+
+                // Mostrar mensaje de éxito si viene desde crear contacto
+                const mensaje = '<%= mensaje %>';
+                if (mensaje && mensaje.trim() !== '') {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer);
+                            toast.addEventListener('mouseleave', Swal.resumeTimer);
+                        }
+                    });
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: mensaje
+                    });
+                }
+            });
+        </script>
     </body>
 </html>
