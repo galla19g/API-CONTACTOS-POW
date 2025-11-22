@@ -7,9 +7,6 @@ const bodyParser = require("body-parser")
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
-
-
-
 let conexion=mysql.createConnection({
     host:"localhost",
     database:"contactos",
@@ -26,13 +23,10 @@ conexion.connect(function(err){
     }
 })
 
-
 app.use(express.static("public"))
 
-
-
 app.get("/",(req,res)=>{
-    res.render('index')
+    res.render('index', {mensaje: ''})  // ← CAMBIO AQUÍ
 })
 
 app.get("/crearcontacto",(req,res)=>{
@@ -43,51 +37,32 @@ app.get("/crearcontacto",(req,res)=>{
     if(err){
         throw err
     }else {
-
             conexion.query(consultabarrios,(err,respuestabarrios)=>{
                 if(err){
                         throw err
                 }else {
-
-                                conexion.query(consulta_tipo_telefono,(err,respuestatipotelefono)=>{
-                if(err){
-                        throw err
-                }else {
-
-                    
-
-        
-                res.render('crearcontacto',{respuestagenero,respuestabarrios,respuestatipotelefono})
-        
-            }})
-
-                    
-
-             //////
-            
-        
-            }})
+                    conexion.query(consulta_tipo_telefono,(err,respuestatipotelefono)=>{
+                        if(err){
+                            throw err
+                        }else {
+                            res.render('crearcontacto',{respuestagenero,respuestabarrios,respuestatipotelefono})
+                        }
+                    })
+                }
+            })
     }
+    })
 })
-})
-
-
-
-
-
-
 
 app.get("/contactos",(req,res)=>{
-const consulta="SELECT * FROM  contacto INNER JOIN genero  ON ( contacto.id_genero = genero.id_genero )INNER JOIN direccion ON (contacto.id_direccion=direccion.id_direccion)INNER JOIN tipo_telefono ON (contacto.id_tipo_telefono=tipo_telefono.id_tipo_telefono)"
-conexion.query(consulta,(err,respuesta)=>{
-    if(err){
-        throw err
-    }else{
-        res.json(respuesta)
-        
-    }
-})
-
+    const consulta="SELECT * FROM  contacto INNER JOIN genero  ON ( contacto.id_genero = genero.id_genero )INNER JOIN direccion ON (contacto.id_direccion=direccion.id_direccion)INNER JOIN tipo_telefono ON (contacto.id_tipo_telefono=tipo_telefono.id_tipo_telefono)"
+    conexion.query(consulta,(err,respuesta)=>{
+        if(err){
+            throw err
+        }else{
+            res.json(respuesta)
+        }
+    })
 })
 
 app.post("/crearcontacto/crear",(req,res)=>{
@@ -99,10 +74,9 @@ app.post("/crearcontacto/crear",(req,res)=>{
     }else{
         res.render('index',{mensaje:'Guardado Exitosamente'})
     }
-})
+    })
 })
 
 app.listen(3000,()=>{
     console.log("servidor activo en http://localhost:3000")
 })
-
